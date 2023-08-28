@@ -41,9 +41,14 @@ const config: HardhatUserConfig = {
             url: `https://data-seed-prebsc-1-s1.binance.org:8545/`,
             accounts: [`${process.env.PRIVATE_KEY}`],
         },
+        snowtrace: {
+            url: 'https://api.avax-test.network/ext/bc/C/rpc',
+            accounts: [`${process.env.PRIVATE_KEY}`],
+        }
     },
     etherscan: {
         apiKey: {
+            snowtrace: "snowtrace",
             goerli: `${process.env.ETHERSCAN_KEY}`,
             sepolia: `${process.env.ETHERSCAN_KEY}`,
             bscTestnet: `${process.env.BSCSCAN_KEY}`,
@@ -52,6 +57,16 @@ const config: HardhatUserConfig = {
             bsctestnet: `${process.env.BSCSCAN_KEY}`,
             polygonMainnet: `${process.env.POLYGONSCAN_KEY}`,
         },
+        customChains: [
+            {
+                network: "snowtrace",
+                chainId: 43113,
+                urls: {
+                    apiURL: "https://api.routescan.io/v2/network/testnet/evm/43113/etherscan",
+                    browserURL: "https://avalanche.testnet.routescan.io"
+                }
+            }
+        ]
     },
     solidity: {
         compilers: [

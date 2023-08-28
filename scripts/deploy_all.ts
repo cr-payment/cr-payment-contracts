@@ -9,6 +9,7 @@ async function main() {
     //Loading accounts
     const accounts: Signer[] = await ethers.getSigners();
     const admin = await accounts[0].getAddress();
+    const verifier = await accounts[0].getAddress();
     //Loading contracts' factory
 
     const CrPayment: CrPayment__factory = await ethers.getContractFactory(
@@ -26,7 +27,7 @@ async function main() {
 
     console.log("ACCOUNT: " + admin);
 
-    const crPayment: CrPayment = await CrPayment.deploy(admin, 100);
+    const crPayment: CrPayment = await CrPayment.deploy(admin, 100, verifier);
     await crPayment.waitForDeployment();
 
     const crPaymentAddress = await crPayment.getAddress();
